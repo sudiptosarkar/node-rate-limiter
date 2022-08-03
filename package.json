@@ -21,11 +21,11 @@
   ],
   "scripts": {
     "lint": "eslint --fix src",
-    "prepack": "yarn ttsc -p tsconfig.json && ttsc -p tsconfig.cjs.json",
+    "prepack": "yarn ttsc -p tsconfig.json && echo '{\n\t\"type\": \"module\"\n}' > dist/esm/package.json && ttsc -p tsconfig.cjs.json",
     "test": "jest src"
   },
   "dependencies": {
-    "just-performance": "4.3.0"
+    "just-performance": "git+https://github.com/sudiptosarkar/just-performance#aff1fa0e32bd659082c03fe30f7b6006f20909ac"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
