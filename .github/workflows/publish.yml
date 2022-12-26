@@ -1,0 +1,40 @@
+name: "🚀 Publish"
+
+on: workflow_dispatch
+
+jobs:
+  release:
+    name: 🚀 Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 checkout
+        uses: actions/checkout@v3
+      - name: 🟢 node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+          registry-url: https://registry.npmjs.org
+      - name: ⌛️ Install Dependencies
+        run: npm ci
+      - name: ⌛️ Test
+        run: npm test
+      - name: ⌛️ Build
+        run: npm run prepack
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v5.1.0
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+      - name: "Auto Version Bump"
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          tag-prefix: "v"
+        env:
+          GITHUB_USER: sudiptosarkar
+          GITHUB_EMAIL: sudiptosarkar@visioplanet.org
+      - name: 🚀 publish
+        run: npm publish --access publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}

@@ -1,4 +1,4 @@
-import { performance } from "just-performance";
+import { performance } from "just-performance-es6-compat";
 
 // generate timestamp or delta
 // see http://nodejs.org/api/process.html#process_process_hrtime
