@@ -1,7 +1,7 @@
 {
   "name": "limiter-es6-compat",
   "description": "A generic rate limiter for the web and node.js. Useful for API clients, web crawling, or other tasks that need to be throttled",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "author": "John Hurliman <jhurliman@jhurliman.org>",
   "maintainers": [
     {
