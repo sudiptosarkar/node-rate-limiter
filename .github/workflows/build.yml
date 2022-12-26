@@ -1,0 +1,24 @@
+name: "⌛️ Build"
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 checkout
+        uses: actions/checkout@v3
+      - name: 🟢 node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+          registry-url: https://registry.npmjs.org
+      - name: ⌛️ Install Dependencies
+        run: npm ci
+      - name: ⌛️ Test
+        run: npm test
+      - name: ⌛️ Build
+        run: npm run prepack

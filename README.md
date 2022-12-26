@@ -1,4 +1,4 @@
-# limiter
+# limiter-es6-compat
 
 [![Build Status](https://travis-ci.org/jhurliman/node-rate-limiter.png)](https://travis-ci.org/jhurliman/node-rate-limiter)
 [![NPM Downloads](https://img.shields.io/npm/dm/limiter.svg?style=flat)](https://www.npmjs.com/package/limiter)
@@ -13,14 +13,14 @@ that can be removed each interval to comply with common API restrictions such as
 
 ## Installation
 
-    yarn add limiter
+    npm install limiter-es6-compat
 
 ## Usage
 
 A simple example allowing 150 requests per hour:
 
 ```javascript
-import { RateLimiter } from "limiter";
+import { RateLimiter } from "limiter-es6-compat";
 
 // Allow 150 requests per hour (the Twitter search limit). Also understands
 // 'second', 'minute', 'day', or a number of milliseconds
@@ -39,7 +39,7 @@ async function sendRequest() {
 Another example allowing one message to be sent every 250ms:
 
 ```javascript
-import { RateLimiter } from "limiter";
+import { RateLimiter } from "limiter-es6-compat";
 
 const limiter = new RateLimiter({ tokensPerInterval: 1, interval: 250 });
 
@@ -55,7 +55,7 @@ currently in effect before the promise is resolved, but if you pass in
 `remainingRequests` set to -1:
 
 ```javascript
-import { RateLimiter } from "limiter";
+import { RateLimiter } from "limiter-es6-compat";
 
 const limiter = new RateLimiter({
   tokensPerInterval: 150,
@@ -80,7 +80,7 @@ TokenBucket. This will return immediately with a boolean value indicating if the
 token removal was successful.
 
 ```javascript
-import { RateLimiter } from "limiter";
+import { RateLimiter } from "limiter-es6-compat";
 
 const limiter = new RateLimiter({ tokensPerInterval: 10, interval: "second" });
 
@@ -94,7 +94,7 @@ To get the number of remaining tokens **outside** the `removeTokens` promise,
 simply use the `getTokensRemaining` method.
 
 ```javascript
-import { RateLimiter } from "limiter";
+import { RateLimiter } from "limiter-es6-compat";
 
 const limiter = new RateLimiter({ tokensPerInterval: 1, interval: 250 });
 
@@ -106,7 +106,7 @@ console.log(limiter.getTokensRemaining());
 Using the token bucket directly to throttle at the byte level:
 
 ```javascript
-import { TokenBucket } from "limiter";
+import { TokenBucket } from "limiter-es6-compat";
 
 const BURST_RATE = 1024 * 1024 * 150; // 150KB/sec burst rate
 const FILL_RATE = 1024 * 1024 * 50; // 50KB/sec sustained rate
@@ -137,3 +137,7 @@ out of order messages or the appearance of "lost" messages under heavy load.
 ## License
 
 MIT License
+
+## Notes Regarding Fork
+
+This repository is a fork, and the fork was needed because the original author seems to have abandoned the original project. This repository was created because ES6 imports don't work, and the Pull Request jhurliman/node-rate-limiter#92 is pending and doesn't look like it will be merged.
